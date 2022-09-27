@@ -4,7 +4,6 @@ import { View, Text, TouchableOpacity } from 'react-native' ;
 import { styles } from './styles';
 
 const CategoryItem = ({ item, onSelected }) => {
-    console.warn('item', item);
     return (
         <View style={styles.container}>
             <TouchableOpacity 
