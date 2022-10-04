@@ -1,5 +1,6 @@
 import { products } from '../../constants/data/products';
-
+import { productsTypes } from '../types';
+const { SELECTED_PRODUCT, FILTERED_PRODUCTS } = productsTypes;
 const initialState = {
     products: products,
     filteredProducts: [],
@@ -7,7 +8,24 @@ const initialState = {
 }
 
 const productReducer = (state = initialState, action) => {
-    return state;
+    switch (action.type) {
+        case SELECTED_PRODUCT:
+            return {
+                ...state,
+                selected: state.products.find(
+                    (product) => product.id === action.productId
+                )
+            }
+        case FILTERED_PRODUCTS:
+            return {
+                ...state,
+                filteredProducts: state.products.filter(
+                    (product) => product.categoryId === action.categoryId
+                ),
+            }
+        default:
+            return state;
+    }
 }
 
 export default productReducer;

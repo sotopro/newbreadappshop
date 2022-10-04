@@ -1,12 +1,11 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { styles } from "./styles";
+import { useSelector } from "react-redux";
 import { products } from "../../constants/data";
 
 const Product = ({ navigation, route }) => {
-
-    const { productId } = route.params;
-    const product = products.find(product => product.id === productId);
+    const product = useSelector((state) => state.products.selected);
     return (
         <View style={styles.container}>
             <Text>id: {product.id}</Text>
