@@ -16,6 +16,7 @@ export const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 10,
         backgroundColor: colors.white,
+        height: 300,
     },
     title: {
         fontSize: 18,
@@ -29,7 +30,6 @@ export const styles = StyleSheet.create({
         marginVertical: 5,
     },
     input: {
-        height: 45,
         borderBottomColor: colors.primary,
         borderBottomWidth: 1,
         width: '90%',
