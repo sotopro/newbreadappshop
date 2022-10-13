@@ -4,8 +4,8 @@ import { View, Text, TouchableOpacity, Button, TextInput, KeyboardAvoidingView }
 import { Input } from "../../components";
 import { colors } from "../../constants/themes";
 import { styles } from "./styles";
-import { signUp } from "../../store/actions/index";
-import { UPDATED_FORM } from "../../utils/forms";
+import { signIn, signUp } from "../../store/actions/index";
+import { onFocusOut, onInputChange, UPDATED_FORM } from "../../utils/forms";
 
 const initialState = {
     email: { value: '', error: '', touched: false, hasError: true },
@@ -44,11 +44,16 @@ const Auth = ({ navigation }) => {
     const messageAction = isLogin ? 'Ingresar' : 'Registrarse';
 
     const onHandleSubmit = () => {
-        dispatch(signUp(formState.email.value, formState.password.value));
+        const { password, email } = formState;
+        dispatch(isLogin ? signIn(email.value ,password.value ) : signUp(email.value, password.value));
     };
 
     const onHandleChange = (value, type) => {
         onInputChange(type, value, dispatchFormState, formState)
+    }
+
+    const onHandleBlur = (value, type) => {
+        onFocusOut(type, value, dispatchFormState, formState)
     }
     return (
         <KeyboardAvoidingView style={styles.containerKeyboard} behavior="padding">
@@ -64,6 +69,7 @@ const Auth = ({ navigation }) => {
                     autoCapitalize="none"
                     autoCorrect={false}
                     onChangeText={(text) => onHandleChange(text, 'email')}
+                    onBlur={(e) => onHandleBlur(e.nativeEvent.text, 'email')}
                     hasError={formState.email.hasError}
                     error={formState.email.error}
                     touched={formState.email.touched}
@@ -78,6 +84,7 @@ const Auth = ({ navigation }) => {
                     autoCapitalize="none"
                     autoCorrect={false}
                     onChangeText={(text) => onHandleChange(text, 'password')}
+                    onBlur={(e) => onHandleBlur(e.nativeEvent.text, 'password')}
                     hasError={formState.password.hasError}
                     error={formState.password.error}
                     touched={formState.password.touched}

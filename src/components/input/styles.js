@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     },
     helperText: {
         fontSize: 12,
-        fontFamily: 'Lato-bold',
+        fontFamily: 'Lato-Bold',
         color: '#ff0000',
     }
 });
